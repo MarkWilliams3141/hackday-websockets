@@ -1,18 +1,161 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <h1>
+      Hack Day August 2020: An Investigation into WebSockets using Amazon API
+      Gateway
+    </h1>
+    <ol>
+      <li>
+        <a href="#introduction">Introduction</a>
+        <ul>
+          <li><a href="#introduction-http">Regular HTTP</a></li>
+          <li><a href="#introduction-short-polling">Short polling </a></li>
+          <li><a href="#introduction-long-polling">Long polling </a></li>
+          <li><a href="#introduction-sse">Server-sent events </a></li>
+          <li><a href="#introduction-websockets">WebSockets </a></li>
+        </ul>
+      </li>
+      <li><a href="#motivation">Motivation</a></li>
+      <li><a href="#demo">Demo</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+    </ol>
+    <h2 id="introduction">Introduction <a href="#introduction">#</a></h2>
+    <p>
+      When building real-time web applications in the browser we need to
+      consider how we are going to send our data from the server to the client.
+      Technologies that enable this have been around for quite some time and are
+      limited to two general approaches: <em>client pull</em> or
+      <em>server push</em>.
+    </p>
+    <p>There are a couple of ways to achieve this goal:</p>
+    <ul>
+      <li>Short polling (client pull)</li>
+      <li>Long polling (client pull)</li>
+      <li>WebSockets (server push)</li>
+      <li>Server-Sent Events (server push)</li>
+    </ul>
+    <p>
+      Client pull— client asking server for updates at certain regular intervals
+    </p>
+    <p>
+      Server push — server is proactively pushing updates to the client (reverse
+      of client pull)
+    </p>
+    <h3 id="introduction-http">Regular HTTP <a href="#introduction-http">#</a></h3>
+    <ol>
+      <li>A client requests a webpage from a server.</li>
+      <li>The server calculates the response</li>
+      <li>The server sends the response to the client.</li>
+    </ol>
+    <img class="diagram" alt="Standard HTTP" src="../assets/intro-http.png" />
+    <h3 id="introduction-short-polling">Short Polling <a href="#introduction-short-polling">#</a></h3>
+    <ol>
+      <li>
+        A client requests a webpage from a server using regular HTTP.
+      </li>
+      <li>
+        The client receives the requested webpage and executes the JavaScript on
+        the page which requests a file from the server at regular intervals
+        (e.g. 0.5 seconds).
+      </li>
+      <li>
+        The server calculates each response and sends it back, just like normal
+        HTTP traffic.
+      </li>
+    </ol>
+    <img
+      class="diagram"
+      alt="Standard HTTP"
+      src="../assets/intro-short-polling.png"
+    />
+    <h3 id="introduction-long-polling">Long Polling <a href="#introduction-long-polling">#</a></h3>
+    <ol>
+      <li>
+        A client requests a webpage from a server using regular HTTP.
+      </li>
+      <li>
+        The client receives the requested webpage and executes the JavaScript on
+        the page which requests a file from the server.
+      </li>
+      <li>
+        The server does not immediately respond with the requested information
+        but waits until there's new information available.
+      </li>
+      <li>
+        When there's new information available, the server responds with the new
+        information.
+      </li>
+      <li>
+        The client receives the new information and immediately sends another
+        request to the server, re-starting the process.
+      </li>
+    </ol>
+    <img
+      class="diagram"
+      alt="Standard HTTP"
+      src="../assets/intro-long-polling.png"
+    />
+    <h3 id="introduction-sse">
+      Server Sent Events (SSE) <a href="#introduction-sse">#</a>
+    </h3>
+    <ol>
+      <li>
+        A client requests a webpage from a server using regular HTTP.
+      </li>
+      <li>
+        The client receives the requested webpage and executes the JavaScript on
+        the page which requests a file from the server.
+      </li>
+      <li>
+        The server does not immediately respond with the requested information
+        but waits until there's new information available.
+        <ul>
+          <li>
+            Real-time traffic from server to client, mostly that's what you'll
+            need
+          </li>
+          <li>You'll want to use a server that has an event loop</li>
+          <li>
+            Connections with servers from other domains are only possible with
+            correct CORS settings
+          </li>
+          <li>
+            If you want to read more, I found these very useful: (article),
+            (article), (article), (tutorial).
+          </li>
+        </ul>
+      </li>
+    </ol>
+    <img class="diagram" alt="Standard HTTP" src="../assets/intro-sse.png" />
+    <h3 id="introduction-websockets">WebSockets</h3>
+    <img
+      class="diagram"
+      alt="Standard HTTP"
+      src="../assets/intro-websockets.png"
+    />
+    <h2 id="motivation">Motivation</h2>
+    <h2 id="demo">Demo</h2>
+    <p></p>
+    <h2 id="architecture">Architecture</h2>
+    <p></p>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
   name: "Home",
-  components: {
-    HelloWorld
-  }
+  components: {}
 };
 </script>
+
+<style>
+.home {
+  max-width: 960px;
+  margin: auto;
+  text-align: left;
+}
+
+.diagram {
+  max-width: 800px;
+}
+</style>
