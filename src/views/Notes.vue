@@ -1,8 +1,7 @@
 <template>
-  <div class="home">
+  <div class="notes container">
     <h1>
-      Hack Day August 2020: An Investigation into WebSockets using Amazon API
-      Gateway
+      Notes
     </h1>
     <ol>
       <li>
@@ -18,6 +17,7 @@
       <li><a href="#motivation">Motivation</a></li>
       <li><a href="#demo">Demo</a></li>
       <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#sources">Sources</a></li>
     </ol>
     <h2 id="introduction">Introduction <a href="#introduction">#</a></h2>
     <p>
@@ -41,14 +41,18 @@
       Server push — server is proactively pushing updates to the client (reverse
       of client pull)
     </p>
-    <h3 id="introduction-http">Regular HTTP <a href="#introduction-http">#</a></h3>
+    <h3 id="introduction-http">
+      Regular HTTP <a href="#introduction-http">#</a>
+    </h3>
     <ol>
       <li>A client requests a webpage from a server.</li>
       <li>The server calculates the response</li>
       <li>The server sends the response to the client.</li>
     </ol>
     <img class="diagram" alt="Standard HTTP" src="../assets/intro-http.png" />
-    <h3 id="introduction-short-polling">Short Polling <a href="#introduction-short-polling">#</a></h3>
+    <h3 id="introduction-short-polling">
+      Short Polling <a href="#introduction-short-polling">#</a>
+    </h3>
     <ol>
       <li>
         A client requests a webpage from a server using regular HTTP.
@@ -68,7 +72,9 @@
       alt="Standard HTTP"
       src="../assets/intro-short-polling.png"
     />
-    <h3 id="introduction-long-polling">Long Polling <a href="#introduction-long-polling">#</a></h3>
+    <h3 id="introduction-long-polling">
+      Long Polling <a href="#introduction-long-polling">#</a>
+    </h3>
     <ol>
       <li>
         A client requests a webpage from a server using regular HTTP.
@@ -128,34 +134,73 @@
     </ol>
     <img class="diagram" alt="Standard HTTP" src="../assets/intro-sse.png" />
     <h3 id="introduction-websockets">WebSockets</h3>
+    <ol>
+      <li>
+        A client requests a webpage from a server using regular http (see HTTP
+        above).
+      </li>
+      <li>
+        The client receives the requested webpage and executes the JavaScript on
+        the page which opens a connection with the server.
+      </li>
+      <li>
+        The server and the client can now send each other messages when new data
+        (on either side) is available.
+        <ul>
+          <li>
+            Real-time traffic from the server to the client
+            <strong>and</strong> from the client to the server
+          </li>
+          <li>You'll want to use a server that has an event loop</li>
+          <li>
+            With WebSockets it is possible to connect with a server from another
+            domain.
+          </li>
+          <li>
+            If you want to read more, I found these very useful: (<a
+              href="http://www.developerfusion.com/article/143158/an-introduction-to-websockets/"
+              rel="noreferrer"
+              >article</a
+            >),
+            <a
+              href="https://developer.mozilla.org/en-US/docs/WebSockets/Writing_WebSocket_client_applications"
+              rel="noreferrer"
+              >(article)</a
+            >
+            (<a
+              href="http://net.tutsplus.com/tutorials/javascript-ajax/start-using-html5-websockets-today/"
+              rel="noreferrer"
+              >tutorial</a
+            >).
+          </li>
+        </ul>
+      </li>
+    </ol>
     <img
       class="diagram"
       alt="Standard HTTP"
       src="../assets/intro-websockets.png"
     />
-    <h2 id="motivation">Motivation</h2>
-    <h2 id="demo">Demo</h2>
+    <h2 id="motivation">Motivation <a href="#motivation">#</a></h2>
+    <h2 id="demo">Demo <a href="#demo">#</a></h2>
     <p></p>
-    <h2 id="architecture">Architecture</h2>
+    <h2 id="architecture">Architecture <a href="#architecture">#</a></h2>
     <p></p>
+
+    <h2 id="sources">Sources <a href="#sources">#</a></h2>
+    <ul>
+      <li>
+        User Tieme's stackoverflow overview of different technologies:
+        https://stackoverflow.com/a/12855533
+      </li>
+      <li>
+        An Introduction To WebSockets:
+        https://www.developerfusion.com/article/143158/an-introduction-to-websockets/
+      </li>
+      <li>
+        About WebSocket APIs in API Gateway:
+        https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-overview.html
+      </li>
+    </ul>
   </div>
 </template>
-
-<script>
-export default {
-  name: "Home",
-  components: {}
-};
-</script>
-
-<style>
-.home {
-  max-width: 960px;
-  margin: auto;
-  text-align: left;
-}
-
-.diagram {
-  max-width: 800px;
-}
-</style>

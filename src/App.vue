@@ -1,12 +1,24 @@
 <template>
   <div id="app">
+    <div id="title">
+      <p>
+        Hack Day August 2020: An Investigation into WebSockets using Amazon API
+        Gateway
+      </p>
+    </div>
     <div id="nav">
-      <!-- No navigation necessary <router-link to="/">Demo</router-link> -->
+      <router-link to="/">Demo</router-link> |
+      <router-link to="/notes">Notes</router-link>
     </div>
     <router-view />
   </div>
 </template>
 
+<script>
+export default {
+  name: "App"
+};
+</script>
 <style>
 #app {
   font-family: "Lucida Console", Monaco, monospace;
@@ -28,5 +40,21 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+#title {
+  max-width: 960px;
+  margin: auto;
+  text-align: center;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+  text-align: left;
+}
+
+.diagram {
+  max-width: 420px;
 }
 </style>
